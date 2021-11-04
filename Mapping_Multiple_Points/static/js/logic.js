@@ -1,8 +1,10 @@
 // Add console.log to check to see if our code is working.
 console.log('working');
 
+
+
 // Create the map object with a center and zoom level, to the approximate center of the US
-let map = L.map('mapid').setView([34.0522, -118.2437], 14);
+let map = L.map('mapid').setView([35, -95], 5);
 // equivalent to the following:
 // let map = L.map("mapid", {
 //     center: [
@@ -52,3 +54,19 @@ let circleMarker = L.circleMarker([34.0522, -118.2437],
                             fillopacity: 0.5
                         }
                     ).addTo(map);
+
+// get data from cities.js
+let cityData = cities;
+
+// add multiple cities as markers
+cityData.forEach(function(city) {
+    console.log(city);
+    L.circleMarker(city.location, {
+        radius: city.population/2e5,
+        color: 'orange',
+        fillColor: 'orange',
+        fillOpacity: 0.25
+    })
+    .bindPopup('<h2>' + city.city + ', ' + city.state + '</h2> <hr> <h3>Population ' + city.population.toLocaleString() + '</h3>')
+    .addTo(map);
+})
