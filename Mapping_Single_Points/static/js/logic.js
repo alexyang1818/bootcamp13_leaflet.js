@@ -2,7 +2,7 @@
 console.log('working');
 
 // Create the map object with a center and zoom level, to the approximate center of the US
-let map = L.map('mapid').setView([40.7, -94.5], 4);
+let map = L.map('mapid').setView([34.0522, -118.2437], 14);
 // equivalent to the following:
 // let map = L.map("mapid", {
 //     center: [
@@ -15,9 +15,8 @@ let map = L.map('mapid').setView([40.7, -94.5], 4);
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
-    id: 'mapbox/streets-v11', // shows the streets on the map
-    // tileSize: 512,
-    // zoomOffset: -1,
+    // id: 'mapbox/streets-v11', // shows the streets on the map
+    id: 'mapbox/dark-v10', // use dark theme
     accessToken: API_KEY
 });
 // other map styles available under 'id':
@@ -30,3 +29,26 @@ let streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{
 
 // then we add our 'graymap' tile layer to the map.
 streets.addTo(map);
+
+// add a marker to the map
+let marker = L.marker([34.0522, -118.2437]).addTo(map); 
+
+// add a circle to the map
+let circle = L.circle([34.0522, -118.2437],
+    {
+        radius: 300,
+        color: 'black',
+        fillColor: 'yellow',
+        fillopacity: 0.5
+    }
+).addTo(map);
+
+// add a circleMarker to the map
+let circleMarker = L.circleMarker([34.0522, -118.2437],
+                        {
+                            radius: 300, // radius has 300 pixels
+                            color: 'black',
+                            fillColor: 'gray',
+                            fillopacity: 0.5
+                        }
+                    ).addTo(map);
